@@ -8,5 +8,6 @@ for (let i = 0; i < 256; i++) {
     cell.setAttribute("class", "cell");
     cell.setAttribute("style", `width: ${cellWidth}px; height: ${cellHeight}px;`);
     container.appendChild(cell);
+    // change color on hover
+    cell.addEventListener("mouseenter", (event) => event.target.classList.add("change-color"));
 }
-
