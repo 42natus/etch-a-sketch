@@ -11,10 +11,12 @@ html {
 body {
     margin: 0;
     padding: 0;
+    height: 100vh;
 }
 
+/* GRID STYLING */
 .container {
-    width: 70vw;
+    width: 50vw;
     height: 70vh;
     margin: auto;
     display: flex;

@@ -2,7 +2,8 @@ const button = document.querySelector("button");
 const container = document.querySelector(".container");
 
 // from the width and height values set in the stylesheet
-const CONTAINER_SIZE = 70;
+const CONTAINER_SIZE_WIDTH = 50;
+const CONTAINER_SIZE_HEIGHT = 70; 
 
 // draw an initial 16x16 grid once the page loads
 document.addEventListener("DOMContentLoaded", drawGrid);
@@ -13,8 +14,8 @@ button.addEventListener("changedimension", drawGrid);
 function drawGrid(event) {
     const dimension = event.detail ? event.detail.dimension : 16;
     const gridSize = dimension * dimension;
-    const cellWidth = CONTAINER_SIZE / dimension;
-    const cellHeight = CONTAINER_SIZE / dimension;
+    const cellWidth = CONTAINER_SIZE_WIDTH / dimension;
+    const cellHeight = CONTAINER_SIZE_HEIGHT / dimension;
 
     for (let i = 0; i < gridSize; i++) {
         const cell = document.createElement("div");
