@@ -6,11 +6,11 @@ html {
 *::before,
 *::after {
     box-sizing: inherit;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 body {
-    margin: 0;
-    padding: 0;
+    padding: 5vh 0;
     height: 100vh;
 }
 
@@ -30,4 +30,25 @@ body {
 
 .change-color {
     background-color: #000;
+}
+
+/* BEZEL STYLING */
+.bezel {
+    width: 50vw;
+    height: 8vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2vh auto 3vh;
+}
+
+.bezel h1 {
+    margin: 0;
+}
+
+button {
+    border-radius: 50%;
+    padding: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
 }
