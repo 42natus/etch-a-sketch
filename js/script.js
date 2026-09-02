@@ -23,7 +23,7 @@ function drawGrid(event) {
         cell.setAttribute("style", `width: ${cellWidth}vw; height: ${cellHeight}vh;`);
         container.appendChild(cell);
         // change color on hover
-        cell.addEventListener("mouseenter", (event) => event.target.classList.add("change-color"));
+        cell.addEventListener("mouseenter", (event) => event.target.style.backgroundColor = generateRandomColor());
     }
 }
 
@@ -47,4 +47,11 @@ function getDimension() {
 function clearGrid() {
     const cells = container.querySelectorAll(".cell");
     cells.forEach((cell) => cell.remove());
+}
+
+function generateRandomColor() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`
 }
