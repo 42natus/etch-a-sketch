@@ -8,6 +8,7 @@ const CONTAINER_SIZE_HEIGHT = 65;
 // draw an initial 16x16 grid once the page loads
 document.addEventListener("DOMContentLoaded", drawGrid);
 
+// create new grid
 button.addEventListener("click", getDimension);
 button.addEventListener("changedimension", drawGrid);
 
@@ -17,6 +18,7 @@ function drawGrid(event) {
     const cellWidth = CONTAINER_SIZE_WIDTH / dimension;
     const cellHeight = CONTAINER_SIZE_HEIGHT / dimension;
 
+    // create grid cells
     for (let i = 0; i < gridSize; i++) {
         const cell = document.createElement("div");
         cell.setAttribute("class", "cell");
@@ -24,47 +26,49 @@ function drawGrid(event) {
         container.appendChild(cell);
     }
 
+    // change color on hover
     const cells = document.querySelectorAll(".cell");
-
     cells.forEach((cell) => {
         let opacity = 10;
         cell.addEventListener("mouseenter", (event) => {
-            event.target.style.backgroundColor = `${generateRandomColor()}, ${opacity}%`;
+            event.target.style.backgroundColor = `${generateRandomColor()} ${opacity}%)`;
             opacity += 10;
-        })
+        });
     });
 }
 
 function getDimension() {
-    clearGrid();
+    removeCurrentGrid();
 
     let dimension = null;
     while (1 > dimension || dimension > 100) {
         dimension = parseInt(prompt("How many squares per side would you like?\n(Has to be between 1 and 100)", 16));
     }
 
+    // default to 16x16 grid if prompt is cancelled or Esc key pressed.
     dimension = (Number.isNaN(dimension)) ? 16 : dimension;
+    
+    triggerCustomEvent("changedimension", dimension);
+}
 
-    console.log(dimension);
-
-    let changeDimension = new CustomEvent("changedimension", {
+function triggerCustomEvent(event, data=null) {
+    let custom = new CustomEvent(event, {
         detail: {
-            dimension: dimension,
+            dimension: data,
         },
     });
 
-    button.dispatchEvent(changeDimension);
+    button.dispatchEvent(custom);
 }
 
-function clearGrid() {
+function removeCurrentGrid() {
     const cells = container.querySelectorAll(".cell");
     cells.forEach((cell) => cell.remove());
-    opacity = 10;
 }
 
 function generateRandomColor() {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
-    return `rgb(${r}, ${g}, ${b}`
+    return `rgb(${r},${g},${b},`
 }
