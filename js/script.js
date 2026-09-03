@@ -7,6 +7,7 @@ const CONTAINER_SIZE_HEIGHT = 65;
 
 // draw an initial 16x16 grid once the page loads
 let currentDimension = 16;
+let useColors = true;
 document.addEventListener("DOMContentLoaded", drawGrid);
 
 // create new grid
@@ -32,7 +33,11 @@ function drawGrid(event) {
     cells.forEach((cell) => {
         let opacity = 10;
         cell.addEventListener("mouseenter", (event) => {
-            event.target.style.backgroundColor = `${generateRandomColor()} ${opacity}%)`;
+            if (useColors) {
+                event.target.style.backgroundColor = `${generateRandomColor()} ${opacity}%)`; // multi-colored
+            } else {
+                event.target.style.backgroundColor = `rgb(0,0,0, ${opacity}%)`; // greyscale
+            }
             opacity += 10;
         });
     });
@@ -84,3 +89,19 @@ clearGrid.addEventListener("click", (event) => {
     removeCurrentGrid();
     drawGrid(currentDimension);
 })
+
+// options for either color or greyscale
+const greyscale = document.querySelector(".greyscale");
+const colors = document.querySelector(".colors");
+
+greyscale.addEventListener("click", () => {
+    useColors = false;
+    let clickEvent = new Event("click");
+    clearGrid.dispatchEvent(clickEvent);
+});
+
+colors.addEventListener("click", () => {
+    useColors = true;
+    let clickEvent = new Event("click");
+    clearGrid.dispatchEvent(clickEvent);
+});
