@@ -43,6 +43,10 @@ function getDimension() {
         dimension = parseInt(prompt("How many squares per side would you like?\n(Has to be between 1 and 100)", 16));
     }
 
+    dimension = (Number.isNaN(dimension)) ? 16 : dimension;
+
+    console.log(dimension);
+
     let changeDimension = new CustomEvent("changedimension", {
         detail: {
             dimension: dimension,
