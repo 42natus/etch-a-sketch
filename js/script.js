@@ -2,8 +2,8 @@ const button = document.querySelector("button");
 const container = document.querySelector(".container");
 
 // from the width and height values set in the stylesheet
-const CONTAINER_SIZE_WIDTH = 50;
-const CONTAINER_SIZE_HEIGHT = 70; 
+const CONTAINER_SIZE_WIDTH = 35;
+const CONTAINER_SIZE_HEIGHT = 65; 
 
 // draw an initial 16x16 grid once the page loads
 document.addEventListener("DOMContentLoaded", drawGrid);
