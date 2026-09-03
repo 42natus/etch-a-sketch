@@ -1,19 +1,20 @@
-const button = document.querySelector("button");
+const newGrid = document.querySelector(".new-grid");
 const container = document.querySelector(".container");
 
 // from the width and height values set in the stylesheet
 const CONTAINER_SIZE_WIDTH = 35;
-const CONTAINER_SIZE_HEIGHT = 65; 
+const CONTAINER_SIZE_HEIGHT = 65;
 
 // draw an initial 16x16 grid once the page loads
+let currentDimension = 16;
 document.addEventListener("DOMContentLoaded", drawGrid);
 
 // create new grid
-button.addEventListener("click", getDimension);
-button.addEventListener("changedimension", drawGrid);
+newGrid.addEventListener("click", getDimension);
+newGrid.addEventListener("changedimension", drawGrid);
 
 function drawGrid(event) {
-    const dimension = event.detail ? event.detail.dimension : 16;
+    const dimension = event.detail ? event.detail.dimension : currentDimension;
     const gridSize = dimension * dimension;
     const cellWidth = CONTAINER_SIZE_WIDTH / dimension;
     const cellHeight = CONTAINER_SIZE_HEIGHT / dimension;
@@ -47,6 +48,9 @@ function getDimension() {
 
     // default to 16x16 grid if prompt is cancelled or Esc key pressed.
     dimension = (Number.isNaN(dimension)) ? 16 : dimension;
+
+    // set currentDimension to user input for global awareness
+    currentDimension = dimension;
     
     triggerCustomEvent("changedimension", dimension);
 }
@@ -58,7 +62,7 @@ function triggerCustomEvent(event, data=null) {
         },
     });
 
-    button.dispatchEvent(custom);
+    newGrid.dispatchEvent(custom);
 }
 
 function removeCurrentGrid() {
@@ -72,3 +76,11 @@ function generateRandomColor() {
     const b = Math.floor(Math.random() * 256);
     return `rgb(${r},${g},${b},`
 }
+
+const clearGrid = document.querySelector(".clear-grid");
+
+// clear and redraw current grid
+clearGrid.addEventListener("click", (event) => {
+    removeCurrentGrid();
+    drawGrid(currentDimension);
+})
