@@ -22,9 +22,17 @@ function drawGrid(event) {
         cell.setAttribute("class", "cell");
         cell.setAttribute("style", `width: ${cellWidth}vw; height: ${cellHeight}vh;`);
         container.appendChild(cell);
-        // change color on hover
-        cell.addEventListener("mouseenter", (event) => event.target.style.backgroundColor = generateRandomColor());
     }
+
+    const cells = document.querySelectorAll(".cell");
+
+    cells.forEach((cell) => {
+        let opacity = 10;
+        cell.addEventListener("mouseenter", (event) => {
+            event.target.style.backgroundColor = `${generateRandomColor()}, ${opacity}%`;
+            opacity += 10;
+        })
+    });
 }
 
 function getDimension() {
@@ -47,11 +55,12 @@ function getDimension() {
 function clearGrid() {
     const cells = container.querySelectorAll(".cell");
     cells.forEach((cell) => cell.remove());
+    opacity = 10;
 }
 
 function generateRandomColor() {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
-    return `rgb(${r}, ${g}, ${b})`
+    return `rgb(${r}, ${g}, ${b}`
 }
