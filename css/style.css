@@ -89,6 +89,31 @@ body {
     margin: auto;
 }
 
+.grid-lines button {
+    background-color: #60a0ff;
+    color: #163c58;
+    border-color: #60a0ff;
+}
+
+#none {
+    border-style: none;
+}
+
+#solid {
+    border-style: solid;
+    border-color: #28618d;
+}
+
+#dotted {
+    border-style: dotted;
+    border-color: #28618d;
+}
+
+#dashed {
+    border-style: dashed;
+    border-color: #28618d;
+}
+
 button {
     border-radius: 8px;
     padding: 12px;
