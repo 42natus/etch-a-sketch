@@ -14,6 +14,11 @@ document.addEventListener("DOMContentLoaded", drawGrid);
 newGrid.addEventListener("click", getDimension);
 newGrid.addEventListener("changedimension", drawGrid);
 
+let none = false;
+let solid = true;
+let dotted = false;
+let dashed = false;
+
 function drawGrid(event) {
     const dimension = event.detail ? event.detail.dimension : currentDimension;
     const gridSize = dimension * dimension;
@@ -27,9 +32,22 @@ function drawGrid(event) {
         cell.setAttribute("style", `width: ${cellWidth}vw; height: ${cellHeight}vh;`);
         container.appendChild(cell);
     }
-
+    
     // change color on hover
     const cells = document.querySelectorAll(".cell");
+    
+    cells.forEach((cell) => {
+        if (solid) {
+            cell.style.border = "1px solid #e4e3e3";
+        } else if (dotted) {
+            cell.style.border = "1px dotted #e4e3e3";
+        } else if (dashed) {
+            cell.style.border = "1px dashed #e4e3e3";
+        } else {
+            cell.style.border = "1px none #e4e3e3";
+        }
+    });
+
     cells.forEach((cell) => {
         let opacity = 10;
         cell.addEventListener("mouseenter", (event) => {
@@ -105,3 +123,46 @@ colors.addEventListener("click", () => {
     let clickEvent = new Event("click");
     clearGrid.dispatchEvent(clickEvent);
 });
+
+// update the grid's lines style based on user's choice
+const gridLines = document.querySelector(".grid-lines");
+gridLines.addEventListener("click", (event) => {
+    let target = event.target;
+    switch (target.id) {
+        case "none":
+            none = true;
+            solid = dotted = dashed = false;
+            break;
+        case "solid":
+            solid = true;
+            none = dotted = dashed = false;
+            break;
+        case "dotted":
+            dotted = true;
+            solid = none = dashed = false;
+            break;
+        case "dashed":
+            dashed = true;
+            solid = dotted = none = false;
+            break;
+    }
+
+    // recreate grid with new grid lines
+    let clickEvent = new Event("click");
+    clearGrid.dispatchEvent(clickEvent);
+});
+
+// function setGridLinesStyle(cells) {
+//     cells.forEach((cell) => {
+//         if (solid) {
+//             cell.setAttribute("style", "border: 1px solid #e4e3e3;");
+//         } else if (dotted) {
+//             cell.setAttribute("style", "border: 1px dotted #e4e3e3;");
+//         } else if (dashed) {
+//             cell.setAttribute("style", "border: 1px dashed #e4e3e3;");
+//         } else {
+//             cell.setAttribute("style", "border: 1px none #e4e3e3;");
+//         }
+//     });
+//     return cells;
+// }
