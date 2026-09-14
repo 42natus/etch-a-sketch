@@ -13,11 +13,11 @@ A grid you can "sketch" on using a mouse. Similar to the actual toy. The project
     - `COLORS`  
     The cells get randomly colored each time the mouse interacts with them. The colors start out really light then get darker upon each interaction with the mouse.
 
-2. The grid can be resized to an arbitrary size within the range of 1 – 100 using the `NEW GRID` button. This limit was chosen to prevent potential delays, freezing or crashing due to high resource usage in generating more squares.
+3. The grid can be resized to an arbitrary size within the range of 1 – 100 using the `NEW GRID` button. This limit was chosen to prevent potential delays, freezing or crashing due to high resource usage in generating more squares.
 
-3. A `CLEAR` button to erase the sketch on the grid.
+4. A `CLEAR` button to erase the sketch on the grid.
 
-4. Four different grid styles:
+5. Four different grid styles:
 
     - `NONE`: The cells on the grid would have no outlines resulting in a blank white canvas.
 
